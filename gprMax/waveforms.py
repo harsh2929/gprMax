@@ -120,3 +120,58 @@ class Waveform(object):
         ampvalue *= self.amp
 
         return ampvalue
+    
+    
+    
+    '''
+
+def gaussian(waveform, time, dt):
+    delay = time - waveform.chi
+    ampvalue = np.exp(-waveform.zeta * delay**2)
+    return ampvalue
+    '''
+    
+    
+    '''
+   
+    
+def calculate_value(self, time, dt):
+    self.calculate_coefficients()
+
+    func = waveform_funcs.get(self.type, None)
+    if func is None:
+        raise ValueError('Invalid waveform type')
+
+    ampvalue = func(self, time, dt)
+    ampvalue *= self.amp
+    return ampvalue
+    '''
+    
+'''
+waveform_funcs = {
+    'gaussian': gaussian,
+    'gaussiandot': gaussiandot,
+    'gaussiandotnorm': gaussiandotnorm,
+    'gaussianprime': gaussianprime,
+    'gaussiandoubleprime': gaussiandoubleprime,
+    'gaussiandotdot': gaussiandotdot,
+    'gaussiandotdotnorm': gaussiandotdotnorm,
+    'ricker': ricker,
+    'sine': sine,
+    'contsine': contsine,
+    'impulse': impulse,
+    'user': user
+}
+
+def calculate_value(self, time, dt):
+    self.calculate_coefficients()
+
+    func = waveform_funcs.get(self.type, None)
+    if func is None:
+        raise ValueError('Invalid waveform type')
+
+    ampvalue = func(self, time, dt)
+    ampvalue *= self.amp
+    return ampvalue
+
+'''
