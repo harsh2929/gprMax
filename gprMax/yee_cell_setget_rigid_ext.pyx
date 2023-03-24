@@ -124,6 +124,7 @@ cdef bint get_rigid_Hy(int i, int j, int k, np.int8_t[:, :, :, ::1] rigidH):
             result = True
     return result
 
+
 cdef bint get_rigid_Hz(int i, int j, int k, np.int8_t[:, :, :, ::1] rigidH):
     cdef bint result
     result = False
@@ -138,7 +139,7 @@ cdef void set_rigid_Hx(int i, int j, int k, np.int8_t[:, :, :, ::1] rigidH):
     rigidH[0, i, j, k] = True
     if i != 0:
         rigidH[1, i - 1, j, k] = True
-
+        
 cdef void set_rigid_Hy(int i, int j, int k, np.int8_t[:, :, :, ::1] rigidH):
     rigidH[2, i, j, k] = True
     if j != 0:
@@ -155,3 +156,43 @@ cdef void set_rigid_H(int i, int j, int k, np.int8_t[:, :, :, ::1] rigidH):
 cdef void unset_rigid_H(int i, int j, int k, np.int8_t[:, :, :, ::1] rigidH):
     rigidH[:, i, j, k] = False
 
+    
+    
+'''
+Logic i wish to implement
+
+
+@cython.boundscheck(False)
+@cython.wraparound(False)
+cdef bint get_rigid_ex(int i, int j, int k, np.ndarray[np.bool_t, ndim=4] rigid_electric_components):
+    return (
+        rigid_electric_components[0, i, max(j, 0), k]
+        or rigid_electric_components[1, i, max(j - 1, 0), k]
+        or rigid_electric_components[3, i, max(j, 0), k - 1]
+        or rigid_electric_components[2, i, max(j - 1, 0), k - 1]
+    )
+
+@cython.boundscheck(False)
+@cython.wraparound(False)
+cdef bint get_rigid_ey(int i, int j, int k, np.ndarray[np.bool_t, ndim=4] rigid_electric_components):
+    return (
+        rigid_electric_components[4, i, j, max(k, 0)]
+        or rigid_electric_components[7, max(i - 1, 0), j, k]
+        or rigid_electric_components[5, i, j, max(k - 1, 0)]
+        or rigid_electric_components[6, max(i - 1, 0), j, max(k - 1, 0)]
+    )
+
+@cython.boundscheck(False)
+@cython.wraparound(False)
+cdef bint get_rigid_ez(int i, int j, int k, np.ndarray[np.bool_t, ndim=4] rigid_electric_components):
+    return (
+        rigid_electric_components[8, i, j, max(k, 0)]
+        or rigid_electric_components[9, max(i - 1, 0), j, k]
+        or rigid_electric_components[11, i, max(j - 1, 0), k]
+        or rigid_electric_components[10, max(i - 1, 0), max(j - 1, 0), k]
+    )
+
+@cython.boundscheck(False)
+@cython.wraparound(False)
+cdef void set_rigid_ex(int i, int j, int k, np.ndarray[np.bool_t, ndim=4] rigid_electric_components):
+'''
