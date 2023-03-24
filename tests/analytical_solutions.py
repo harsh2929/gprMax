@@ -90,7 +90,7 @@ def hertzian_dipole_fs(iterations, dt, dxdydz, rx):
     Hy_z = z
     Hr_y = np.sqrt((Hy_x**2 + Hy_y**2 + Hy_z**2))
     tau_Hy = Hr_y / c
-
+    
     # Coordinates of Rx for Hz FDTD component
     Hz_x = x + 0.5 * dx
     Hz_y = y + 0.5 * dy
