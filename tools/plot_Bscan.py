@@ -18,11 +18,9 @@
 
 import argparse
 import os
-
 import h5py
 import numpy as np
 import matplotlib.pyplot as plt
-
 from gprMax.exceptions import CmdInputError
 from .outputfiles_merge import get_output_data
 
@@ -31,16 +29,15 @@ def mpl_plot(filename, outputdata, dt, rxnumber, rxcomponent):
     """Creates a plot (with matplotlib) of the B-scan.
 
     Args:
-        filename (string): Filename (including path) of output file.
-        outputdata (array): Array of A-scans, i.e. B-scan data.
+        filename (str): Filename (including path) of output file.
+        outputdata (numpy.ndarray): Array of A-scans, i.e. B-scan data.
         dt (float): Temporal resolution of the model.
         rxnumber (int): Receiver output number.
         rxcomponent (str): Receiver output field/current component.
 
     Returns:
-        plt (object): matplotlib plot object.
+        None.
     """
-
     (path, filename) = os.path.split(filename)
 
     fig = plt.figure(num=filename + ' - rx' + str(rxnumber), 
@@ -51,9 +48,6 @@ def mpl_plot(filename, outputdata, dt, rxnumber, rxcomponent):
                vmin=-np.amax(np.abs(outputdata)), vmax=np.amax(np.abs(outputdata)))
     plt.xlabel('Trace number')
     plt.ylabel('Time [s]')
-    # plt.title('{}'.format(filename))
-
-    # Grid properties
     ax = fig.gca()
     ax.grid(which='both', axis='both', linestyle='-.')
 
@@ -72,7 +66,7 @@ def mpl_plot(filename, outputdata, dt, rxnumber, rxcomponent):
     # fig.savefig(path + os.sep + savefile + '.png', dpi=150, format='png', 
     #             bbox_inches='tight', pad_inches=0.1)
 
-    return plt
+    plt.show()
 
 
 if __name__ == "__main__":
@@ -99,3 +93,7 @@ if __name__ == "__main__":
         plthandle = mpl_plot(args.outputfile, outputdata, dt, rx, args.rx_component)
 
     plthandle.show()
+    
+    
+   
+      
