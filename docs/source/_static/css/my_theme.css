@@ -6,11 +6,11 @@
 }
 
 
-/* Maths */
-.MathJax_Display {
-    text-align: left !important;
-}
 
+/* Maths */
+.mathjax-display {
+text-align: left;
+}
 
 /* Citation tables */
 .wy-table-responsive {
@@ -18,10 +18,32 @@
     border-top: 1px dotted rgba(235,235,235,1) ! important;
 }
 
-table.citation td {
-    padding: 5px ! important;
+
+.citation-table td.label {
+width: 100px;
 }
 
-table.citation td.label {
-    width: 100px ! important;
+
+/* Main panel */
+.main-panel {
+max-width: 80%;
 }
+
+
+
+/* Citation tables */
+.citation-table {
+margin: 0;
+border-top: 1px dotted rgba(235, 235, 235, 1);
+}
+
+.citation-table td {
+padding: 5px;
+}
+
+
+
+/*
+/ Apply max-width to the main panel /
+/ Align math formulas to the left /
+/ Style citation tables */
