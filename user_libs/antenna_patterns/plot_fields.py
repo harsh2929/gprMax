@@ -17,20 +17,18 @@ from gprMax.constants import c, z0
 
 # Parse command line arguments
 parser = argparse.ArgumentParser(description='Plot field patterns from a simulation with receivers positioned in circles around an antenna. This module should be used after the field pattern data has been processed and stored using the initial_save.py module.', usage='cd gprMax; python -m user_libs.antenna_patterns.plot_fields numpyfile')
-parser.add_argument('numpyfile', help='name of numpy file including path')
-# parser.add_argument('hertzian', help='name of numpy file including path')
+parser.add_argument('field_patterns_file', help='name of numpy file including path')
 args = parser.parse_args()
-patterns = np.load(args.numpyfile)
-# hertzian = np.load(args.hertzian)
+field_patterns = np.load(args.field_patterns_file)
 
 ########################################
 # User configurable parameters
 
 # Pattern type (E or H)
-type = 'H'
+field_type = 'H'
 
 # Relative permittivity of half-space for homogeneous materials (set to None for inhomogeneous)
-epsr = 5
+epsr = None
 
 # Observation radii and angles
 radii = np.linspace(0.1, 0.3, 20)
@@ -44,8 +42,8 @@ f = 1.5e9  # GSSI 1.5GHz antenna model
 D = 0.060  # GSSI 1.5GHz antenna model
 
 # Minimum value for plotting energy and ring steps (dB)
-min = -72
-step = 12
+min_dB = -72
+step_dB = 12
 ########################################
 
 # Critical angle and velocity
